@@ -40,26 +40,34 @@ const AdventCalendar = () => {
         }} />
       </div>
 
-      {/* Subtle sparkles effect */}
+      {/* Sparkles effect - more visible and constant */}
       <div className="fixed inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-advent-gold rounded-full opacity-0"
+            className="absolute rounded-full opacity-0"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              filter: 'blur(1px)',
+              width: `${2 + Math.random() * 3}px`,
+              height: `${2 + Math.random() * 3}px`,
+              background: i % 3 === 0 
+                ? 'hsl(var(--advent-gold))' 
+                : i % 3 === 1 
+                ? 'hsl(var(--advent-gold-light))' 
+                : 'hsl(var(--advent-wine) / 0.6)',
+              filter: 'blur(1.5px)',
+              boxShadow: '0 0 8px currentColor',
             }}
             animate={{
-              opacity: [0, 0.6, 0],
-              scale: [0.5, 1.5, 0.5],
-              y: [0, -30, 0],
+              opacity: [0, 0.9, 0],
+              scale: [0.3, 2, 0.3],
+              y: [0, -40, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 2 + Math.random() * 1.5,
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: Math.random() * 2,
               ease: "easeInOut"
             }}
           />
