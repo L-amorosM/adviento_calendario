@@ -9,8 +9,8 @@ const AdventCalendar = () => {
   
   // Get current date (for testing, you can hardcode a date)
   const today = new Date();
-  const currentDay = today.getDate();
-  const currentMonth = today.getMonth(); // 0 = January, 11 = December
+  const currentDay = 25;
+  const currentMonth = 11; // 0 = January, 11 = December
   
   // Check if a day can be opened (only in December and if date has arrived)
   const canOpenDay = (day: number) => {
