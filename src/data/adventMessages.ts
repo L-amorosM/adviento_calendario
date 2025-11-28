@@ -161,4 +161,11 @@ export const adventMessages: AdventDay[] = [
     image: "/src/assets/day-4.jpg",
     gift: "Mi corazón, hoy y todos los días del año."
   },
+  {
+    day: 25,
+    title: "El Día Más Especial",
+    message: "Hoy es Navidad, y quiero que sepas que eres el regalo más hermoso que la vida me ha dado. Cada momento a tu lado es un tesoro, cada sonrisa tuya ilumina mi mundo, y cada día contigo es una bendición. Este calendario fue solo una pequeña forma de demostrarte lo mucho que significas para mí. Gracias por existir, por amarme, por ser tú. Eres mi hogar, mi paz, mi todo. Te amo infinitamente, hoy y siempre. Feliz Navidad, amor mío.",
+    image: "/src/assets/day-5.jpg",
+    gift: "Un año entero de amor, sorpresas y momentos inolvidables juntos."
+  },
 ];
