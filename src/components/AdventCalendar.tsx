@@ -32,7 +32,7 @@ const AdventCalendar = () => {
       {/* Background with elegant gradient */}
       <div className="fixed inset-0 bg-gradient-to-br from-advent-cream via-advent-gold-light/20 to-advent-wine/10" />
       
-      {/* Optional: Add background pattern */}
+      {/* Background pattern */}
       <div className="fixed inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 25px 25px, hsl(var(--advent-gold)) 2%, transparent 0%)`,
@@ -40,25 +40,66 @@ const AdventCalendar = () => {
         }} />
       </div>
 
+      {/* Subtle sparkles effect */}
+      <div className="fixed inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-advent-gold rounded-full opacity-0"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              filter: 'blur(1px)',
+            }}
+            animate={{
+              opacity: [0, 0.6, 0],
+              scale: [0.5, 1.5, 0.5],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-12 md:py-16">
+      <div className="relative z-10 container mx-auto px-4 py-8 md:py-12 lg:py-16">
         {/* Header */}
         <motion.div 
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4">
+          <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Calendario de Adviento
           </h1>
-          <p className="font-lato text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            24 días de amor, sorpresas y momentos especiales
-          </p>
+          
+          {/* Welcome Message */}
+          <motion.div 
+            className="max-w-xl mx-auto mb-8 px-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <p className="font-lato text-base md:text-lg leading-relaxed text-muted-foreground/90">
+              Este calendario es para ti.
+              <br />
+              Cada día es una pequeña sorpresa, un detalle y un recordatorio
+              <br className="hidden md:block" />
+              de lo mucho que te quiero.
+              <br />
+              Ábrelo con calma y disfruta de cada momento.
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Calendar Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto px-2 sm:px-0">
           {adventMessages.map((item, index) => {
             const isUnlocked = canOpenDay(item.day);
             const isToday = currentMonth === 11 && currentDay === item.day;
@@ -79,10 +120,10 @@ const AdventCalendar = () => {
                   onClick={() => handleDayClick(item.day)}
                   disabled={!isUnlocked}
                   className={`
-                    w-full h-full relative rounded-2xl overflow-hidden
-                    transition-all duration-300
+                    w-full h-full relative rounded-xl md:rounded-2xl overflow-hidden
+                    transition-all duration-300 min-h-[100px] sm:min-h-[120px]
                     ${isUnlocked 
-                      ? 'cursor-pointer hover:scale-105 hover:shadow-xl' 
+                      ? 'cursor-pointer hover:scale-105 hover:shadow-xl active:scale-95' 
                       : 'cursor-not-allowed opacity-40'
                     }
                     ${isToday ? 'animate-glow' : ''}
@@ -107,7 +148,7 @@ const AdventCalendar = () => {
                   {/* Day Number */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className={`
-                      font-playfair text-5xl md:text-6xl font-bold
+                      font-playfair text-4xl sm:text-5xl md:text-6xl font-bold
                       ${isUnlocked 
                         ? 'text-transparent bg-clip-text bg-gradient-to-br from-advent-wine to-advent-gold' 
                         : 'text-muted-foreground'
